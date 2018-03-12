@@ -1,7 +1,7 @@
 -module(task_3).
 
 -export([distance/2]).
-
+-import(math,[sqrt/1]).
 -include_lib("eunit/include/eunit.hrl").
 
 
@@ -9,7 +9,7 @@
 %% points are given as tuple {X, Y}, distance should be float
 distance({X1, Y1}, {X2, Y2}) ->
     %% BEGIN (write your solution here)
-    
+    sqrt(((X2-X1)*(X2-X1))+((Y2-Y1)*(Y2-Y1))).
     %% END
 
 distance_test() ->
