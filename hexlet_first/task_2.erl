@@ -8,7 +8,7 @@
 is_equal(F1, F2, Precision) ->
     %% BEGIN (write your solution here)
     if 
-        F1 == F2 -> true;
+        round(F1/Precision) == round(F2/Precision) -> true;
         true -> false
     end.
     %% END
