@@ -8,7 +8,19 @@
 %% http://www.erlang.org/doc/man/lists.html#any-2
 any(Pred, List) ->
     %% BEGIN (write your solution here)
-    
+    case List of
+	[] ->
+	    false;
+	[H|T] ->
+	    case Pred(H) of 
+		true ->
+		    true;
+		false ->
+		    any(Pred,T);
+		_ -> false
+	    end;
+	_ -> false
+    end.
     %% END
 
 any_test() ->
@@ -26,7 +38,16 @@ any_test() ->
 %% http://www.erlang.org/doc/man/lists.html#all-2
 all(Pred, List) ->
     %% BEGIN (write your solution here)
-    
+    case List of
+	[] ->
+	    true;
+	[H|T] ->
+	    case Pred(H) of
+		true ->
+		    all(Pred,T);	
+		false -> false
+	    end
+    end.
     %% END
 
 all_test() ->
