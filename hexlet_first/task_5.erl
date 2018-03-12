@@ -8,7 +8,8 @@
 %% get 3 float numbers from binary
 get_floats(Bin) ->
     %% BEGIN (write your solution here)
-    
+    <<A:64/float,B:64/float,C:64/float>> = Bin,
+    {A,B,C}.
     %% END
 
 get_floats_test() ->
