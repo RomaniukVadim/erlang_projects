@@ -8,7 +8,7 @@
 %% pack 3 float number into single binary
 pack_floats(F1, F2, F3) ->
     %% BEGIN (write your solution here)
-    
+    <<F1:64/float, F2:64/float, F3:64/float>>.
     %% END
 
 pack_floats_test() ->
