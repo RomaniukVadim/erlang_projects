@@ -9,7 +9,11 @@
 %% http://www.erlang.org/doc/man/erlang.html#length-1
 len(List) ->
     %% BEGIN (write your solution here)
-    
+    len(List,0).
+len([_H|T],Num) ->
+    len(T, Num+1);
+len([],Num) ->
+    Num.
     %% END
 
 len_test() ->
@@ -25,7 +29,11 @@ len_test() ->
 %% http://www.erlang.org/doc/man/lists.html#reverse-1
 reverse(List) ->
     %% BEGIN (write your solution here)
-    
+    reverse(List,[]).
+reverse([],Tail) ->
+    Tail;
+reverse([H|T], Tail) ->
+    reverse(T,[H|Tail]).
     %% END
 
 reverse_test() ->
