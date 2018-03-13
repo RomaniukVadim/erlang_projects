@@ -4,12 +4,48 @@
 
 -include_lib("eunit/include/eunit.hrl").
 
+dropwhile(Pred, List) ->
+    case List of
+	[] ->
+	    [];
+	[H|[]] ->
+	    case Pred(H) of
+		true ->
+		    [];
+		_ -> [H]
+	    end;
+	[H|T] ->
+	    case Pred(H) of
+		true ->
+		    dropwhile(Pred,T);
+		_ ->[H|T]
+	    end
+    end.
+
+takewhile(Pred, List) ->
+    case List of
+	[] ->
+	    [];
+	[H|[]] ->
+	    case Pred(H) of
+		true ->
+		    [H];
+		_ -> []
+	    end;
+	[H|T] ->
+	    case Pred(H) of
+		true ->
+		    [H|takewhile(Pred,T)];
+		_ ->takewhile(Pred,[])
+	    end
+    end.
+
 
 %% implement lists:splitwith/2
 %% http://www.erlang.org/doc/man/lists.html#splitwith-2
 splitwith(Pred, List) ->
     %% BEGIN (write your solution here)
-    
+    {takewhile(Pred, List), dropwhile(Pred, List)}.
     %% END
 
 
@@ -29,7 +65,21 @@ splitwith_test() ->
 %% if two lists have different lengths don't throw exception but ignore the rest of longer list
 zipwith(Pred, List1, List2) ->
     %% BEGIN (write your solution here)
-    
+    case List1 of
+	[] ->
+	    [];
+	[H1|[]] ->
+	    case List2 of
+		[H2|[]] ->
+		    [H1+H2]
+	    end;
+	[H1|T1] ->
+	    case List2 of
+		[H2|T2] ->
+		    [H1+H2|zipwith(Pred,T1,T2)]
+	    end
+    end.
+
     %% END
 
 
