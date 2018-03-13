@@ -22,7 +22,7 @@ dropwhile(Pred, List) ->
 	    case Pred(H) of
 		true ->
 		    dropwhile(Pred,T);
-		_ ->[H|dropwhile(Pred,T)]
+		_ ->[H|T]
 	    end
     end.
 		
@@ -56,7 +56,7 @@ takewhile(Pred, List) ->
 	    case Pred(H) of
 		true ->
 		    [H|takewhile(Pred,T)];
-		_ ->takewhile(Pred,T)
+		_ ->takewhile(Pred,[])
 	    end
     end.
     
