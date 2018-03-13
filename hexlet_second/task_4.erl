@@ -9,7 +9,23 @@
 %% http://www.erlang.org/doc/man/lists.html#dropwhile-2
 dropwhile(Pred, List) ->
     %% BEGIN (write your solution here)
-    
+    case List of
+	[] ->
+	    [];
+	[H|[]] ->
+	    case Pred(H) of
+		true ->
+		    [];
+		_ -> [H]
+	    end;
+	[H|T] ->
+	    case Pred(H) of
+		true ->
+		    dropwhile(Pred,T);
+		_ ->[H|dropwhile(Pred,T)]
+	    end
+    end.
+		
     %% END
 
 dropwhile_test() ->
@@ -27,6 +43,22 @@ dropwhile_test() ->
 %% http://www.erlang.org/doc/man/lists.html#takewhile-2
 takewhile(Pred, List) ->
     %% BEGIN (write your solution here)
+    case List of
+	[] ->
+	    [];
+	[H|[]] ->
+	    case Pred(H) of
+		true ->
+		    [H];
+		_ -> []
+	    end;
+	[H|T] ->
+	    case Pred(H) of
+		true ->
+		    [H|takewhile(Pred,T)];
+		_ ->takewhile(Pred,T)
+	    end
+    end.
     
     %% END
 
