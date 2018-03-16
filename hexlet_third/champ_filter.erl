@@ -18,7 +18,12 @@
 
 filter_sick_players(Champ) ->
     %% BEGIN (write your solution here)
-    
+    HealthTeam = lists:map(fun team_filter/1, Champ),
+	lists:filter(fun({team,_,Players}) -> length(Players) >= 5 end,HealthTeam).
+team_filter({team,Name,Players}) ->
+    HealthPlayers = lists:filter(fun({player, _,_,_,Health}) -> Health >= 50
+			      end,Players),
+	{team,Name,HealthPlayers}.
     %% END
 
 
