@@ -30,7 +30,10 @@
 
 make_pairs(Team1, Team2) ->
     %% BEGIN (write your solution here)
-    
+    {team,_,Players1} = Team1,
+    {team,_,Players2} = Team2,
+    [{Name1, Name2} || {player, Name1,_,Rating1,_} <- Players1,
+    {player, Name2,_,Rating2,_} <- Players2 , Rating1 + Rating2 > 600].
     %% END
 
 
