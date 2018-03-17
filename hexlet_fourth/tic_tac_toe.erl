@@ -23,10 +23,31 @@ new_game() ->
 %% {win,o}
 
 win(GameState) ->
-    %% BEGIN (write your solution here)
-    
-    %% END
+    %% BEGIN (write your solution here)    
+    case GameStame of
+	{Top,Center,Bottom} when Top =:= {x,x,x};
+				 Center =:= {x,x,x};
+				 Bottom =:= {x,x,x};
+				 {x,_,_} =:= Top, {x,_,_} =:= Center,{x,_,_} =:= Bottom;
+				 {_,x,_} =:= Top ,{_,x,_} =:= Center,{_,x,_} =:= Bottom;
+				 {_,_,x} =:= Top ,{_,_,x} =:= Center,{_,_,x} =:= Bottom;
+				 {x,_,_} =:= Top ,{_,x,_} =:= Center,{_,_,x} =:= Bottom;
+				 {_,_,x} =:= Top ,{_,x,_} =:= Center,{x,_,_} =:= Bottom ->
+	    {win,x};
+	{Top,Center,Bottom} when Top =:= {o,o,o};
+				 Center =:= {o,o,o};
+				 Bottom =:= {o,o,o};
+				 {o,_,_} =:= Top ,{o,_,_} =:= Center,{o,_,_} =:= Bottom;
+				 {_,o,_} =:= Top ,{_,o,_} =:= Center,{_,o,_} =:= Bottom;
+				 {_,_,o} =:= Top ,{_,_,o} =:= Center,{_,_,o} =:= Bottom;
+				 {o,_,_} =:= Top ,{_,o,_} =:= Center,{_,_,o} =:= Bottom;
+				 {_,_,o} =:= Top ,{_,o,_} =:= Center,{o,_,_} =:= Bottom ->
+	    {win,o};
+	
+	_-> no_win
+    end.
 
+    %% END
 
 
 %% Ячейки нумеруются так:
@@ -68,5 +89,5 @@ win(GameState) ->
     
 move(Cell, Player, GameState) ->
     %% BEGIN (write your solution here)
-    
+    ok.
     %% END
