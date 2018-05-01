@@ -24,26 +24,20 @@ new_game() ->
 
 win(GameState) ->
     %% BEGIN (write your solution here)    
-    case GameStame of
-	{Top,Center,Bottom} when Top =:= {x,x,x};
-				 Center =:= {x,x,x};
-				 Bottom =:= {x,x,x};
-				 {x,_,_} =:= Top, {x,_,_} =:= Center,{x,_,_} =:= Bottom;
-				 {_,x,_} =:= Top ,{_,x,_} =:= Center,{_,x,_} =:= Bottom;
-				 {_,_,x} =:= Top ,{_,_,x} =:= Center,{_,_,x} =:= Bottom;
-				 {x,_,_} =:= Top ,{_,x,_} =:= Center,{_,_,x} =:= Bottom;
-				 {_,_,x} =:= Top ,{_,x,_} =:= Center,{x,_,_} =:= Bottom ->
-	    {win,x};
-	{Top,Center,Bottom} when Top =:= {o,o,o};
-				 Center =:= {o,o,o};
-				 Bottom =:= {o,o,o};
-				 {o,_,_} =:= Top ,{o,_,_} =:= Center,{o,_,_} =:= Bottom;
-				 {_,o,_} =:= Top ,{_,o,_} =:= Center,{_,o,_} =:= Bottom;
-				 {_,_,o} =:= Top ,{_,_,o} =:= Center,{_,_,o} =:= Bottom;
-				 {o,_,_} =:= Top ,{_,o,_} =:= Center,{_,_,o} =:= Bottom;
-				 {_,_,o} =:= Top ,{_,o,_} =:= Center,{o,_,_} =:= Bottom ->
-	    {win,o};
-	
+    case GameState of
+	{{x,_,_},{x,_,_},{x,_,_}} -> {win,x};
+	{{_,x,_},{_,x,_},{_,x,_}} -> {win,x};
+	{{_,_,x},{_,_,x},{_,_,x}} -> {win,x};
+	{{x,_,_},{_,x,_},{_,_,x}} -> {win,x};
+	{{_,_,x},{_,x,_},{x,_,_}} -> {win,x};
+
+	{{o,o,o},{o,o,o},{o,o,o}} -> {win,o};
+	{{o,_,_},{o,_,_},{o,_,_}} -> {win,o};
+	{{_,o,_},{_,o,_},{_,o,_}} -> {win,o};
+	{{_,_,o},{_,_,o},{_,_,o}} -> {win,o};
+	{{o,_,_},{_,o,_},{_,_,o}} -> {win,o};
+	{{_,_,o},{_,o,_},{o,_,_}} -> {win,o};
+  
 	_-> no_win
     end.
 
@@ -89,5 +83,33 @@ win(GameState) ->
     
 move(Cell, Player, GameState) ->
     %% BEGIN (write your solution here)
-    ok.
+    case GameState of
+
+	{{A,B,C},Second,Third} when Cell =:= 1 andalso A == f->
+	    {ok, {{Player,B,C},Second,Third}};
+	{{A,B,C},Second,Third} when Cell =:= 2 andalso B == f->
+	    {ok, {{A,Player,C},Second,Third}};
+	{{A,B,C},Second,Third} when Cell =:= 3 andalso C == f->
+	    {ok, {{A,B,Player},Second,Third}};
+
+
+	{First,{A,B,C},Third} when Cell =:= 4 andalso A == f->
+	    {ok, {First,{Player,B,C},Third}};
+	{First,{A,B,C},Third} when Cell =:= 5 andalso B == f->
+	    {ok, {First,{A,Player,C},Third}};
+	{First,{A,B,C},Third} when Cell =:= 6 andalso C == f->
+	    {ok, {First,{A,B,Player},Third}};
+
+	
+	{First,Second,{A,B,C}} when Cell =:= 7 andalso A == f->
+	    {ok, {First,Second,{Player,B,C}}};
+	{First,Second,{A,B,C}} when Cell =:= 8 andalso B == f->
+	    {ok, {First,Second,{A,Player,C}}};
+	{First,Second,{A,B,C}} when Cell =:= 9 andalso C == f->
+	    {ok, {First,Second,{A,B,Player}}};
+
+	_ ->
+	    {error,invalid_move}
+    end.
+    
     %% END
